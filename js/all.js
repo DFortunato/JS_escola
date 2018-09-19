@@ -18,7 +18,7 @@
         /* Pega o evento de click do botão de cadastro
         var form = document.getElementById("cadastro");
          form.addEventListener("submit",Cadastrar,false);     */
-         var Cadastrar =function (){
+          Cadastrar = function (){
         /*Verifica o campo da escola*/    
             if(!escola.value)
              {
@@ -28,6 +28,5 @@
                  e.preventdefault();
              }
 
-             alert("sakjda");
-            
+             alert("testando");
          }
