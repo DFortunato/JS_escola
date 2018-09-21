@@ -99,8 +99,6 @@ Editar = function (_id) {
     return true;
 }
 
-
-
 Excluir = function (numero) {
     //Busca o index do array comparando com o ID passado
     for (var j = 0; j < LSEscola.length; j++) {
@@ -119,14 +117,60 @@ Excluir = function (numero) {
 
 Listar = function () {
     var tbl = document.createElement("table");
+    var tblhead = document.createElement("thead");
     var tblBody = document.createElement("tbody");
 
-    for (var i = 0; i < LSEscola.length; i++) {
-        var row = document.createElement("tr");
-        var cell = document.createElement("td");
-        var _result = JSON.parse(LSEscola[i]);
+    var row = document.createElement("tr");
+    var cell = document.createElement("th");
+    
+    var cellText = document.createTextNode("ID");
+    cell.appendChild(cellText);
+    cell.scope = "col";
+    row.appendChild(cell);
 
-        var cellText = document.createTextNode(_result.Escola);
+    cell = document.createElement("th");
+    cellText = document.createTextNode("ESCOLA");
+    cell.appendChild(cellText);
+    cell.scope = "col";
+    row.appendChild(cell);
+
+    cell = document.createElement("th");
+    cellText = document.createTextNode("CIDADE");
+    cell.appendChild(cellText);
+    cell.scope = "col";
+    row.appendChild(cell);
+
+    cell = document.createElement("th");
+    cellText = document.createTextNode("EDITAR");
+    cell.appendChild(cellText);
+    cell.scope = "col";
+    row.appendChild(cell);
+
+    cell = document.createElement("th");
+    cellText = document.createTextNode("EXCLUIR");
+    cell.appendChild(cellText);
+    cell.scope = "col";
+    row.appendChild(cell);
+
+    tblhead.appendChild(row);
+
+    tblhead.className = "thead-dark";
+    tbl.appendChild(tblhead);
+
+
+    for (var i = 0; i < LSEscola.length; i++) {
+        var _result = JSON.parse(LSEscola[i]);
+        var row = document.createElement("tr");
+        var cell = document.createElement("th");
+
+        var cellText = document.createTextNode("ID");
+        cellText = document.createTextNode(_result.ID);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+
+        cell = document.createElement("td");
+        cellText = document.createTextNode("ESCOLA");
+        cellText = document.createTextNode(_result.Escola);
         cell.appendChild(cellText);
         row.appendChild(cell);
 
@@ -159,10 +203,12 @@ Listar = function () {
         cell.appendChild(btnExcluir);
 
         row.appendChild(cell);
+        row.scope="row";
         tblBody.appendChild(row);
     }
 
     tbl.appendChild(tblBody);
+    tbl.className = "table";
     document.body.appendChild(tbl);
 }
 
