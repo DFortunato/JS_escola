@@ -1,0 +1,100 @@
+var dados = {id: "", escola: "", cidade: ""}
+         var i = 0;
+         
+
+         _addCidadeEscola = function() {
+            var y = document.getElementById("IdEscola").value;
+            var x = document.getElementById("IdCidade").value;
+            
+            dados[i++] =  {id: i, escola: y, cidade: x};
+
+            /*var x = document.createTextNode(dados[i].escola);*/
+        }
+
+
+
+
+$(function(){
+    var operacao = "A"; 
+    var _id = -1; //Índice do item selecionado na lista
+    var LSEscola = localStorage.getItem("LSEscola");// Recupera os dados armazenados
+    LSEscola = JSON.parse(LSEscola); // Converte string para objeto
+    if(LSEscola == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+    LSEscola = [];
+});
+
+
+<table class="table">
+    <tr>
+        <th> Escola</th>
+        <th> Cidade</th>
+    </tr>
+        <tr id ="tr">
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Situacao)
+            </td>
+           
+            <td>
+                <input type="button" class="btn btn-info" value="Editar" />
+                <input type="button" id="btnDelete" class="btn btn-danger" value="Excluir" />
+            </td>
+        </tr>
+    
+</table>
+
+
+ $("#tblListar").html("");
+    $("#tblListar").html(
+        "<thead>"+
+        "   <tr>"+
+        "   <th></th>"+
+        "   <th>Código</th>"+
+        "   <th>Nome</th>"+
+        "   <th>Cidade</th>"+
+        "   </tr>"+
+        "</thead>"+
+        "<tbody>"+
+        "</tbody>"
+        );
+    for(var i in LSEscola){
+        var cli = JSON.parse(LSEscola[i]);
+        $("#tblListar tbody").append("<tr>");
+        $("#tblListar tbody").append("<td><img src='edit.png' alt='"+i+"'class='btnEditar'/><img src='delete.png' alt='"+i+"' class='btnExcluir'/></td>");
+        $("#tblListar tbody").append("<td>"+cli.ID+"</td>");
+        $("#tblListar tbody").append("<td>"+cli.Escola+"</td>");
+        $("#tblListar tbody").append("<td>"+cli.Cidade+"</td>");
+        $("#tblListar tbody").append("</tr>");
+    }
+
+
+function _editar(){
+    window.location.href = "js_escola.html";
+   }
+  
+
+
+
+window.onload = function()
+{
+   
+    var cidades = new Array ("Bauru","Botucatu","Perdeineiras","Piratininja","Sorocaba","Cafelândia");
+        var comboCidades = document.getElementById("IdCidade");
+    for (var x=0; x<cidades.length;x++)
+     {
+       var opt0 = document.createElement("option"); 
+       opt0.value = x;
+       opt0.text =cidades[x];
+       comboCidades.add(opt0, cidades[x]);
+      }
+    
+};
+
+
+LSEscola.splice(i, 1);
+    localStorage.setItem("LSEscola", JSON.stringify(LSEscola));
+    alert("Registro excluído.");
+
+
