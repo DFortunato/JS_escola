@@ -1,8 +1,9 @@
 document.write('<script src="js\/dados.js" type="text\/javascript"><\/script>');
 
 window.onload = function () {
-
+    
     SelectList();
+    Listar(); 
 
 };
 
@@ -16,7 +17,7 @@ function Cadastrar() {
     }
     else {
         Adicionar();
-        window.location.href = "TelaCadastro.html";
+        window.location.href = "cadastro.html";
     }
 }
 

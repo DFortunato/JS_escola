@@ -1,5 +1,33 @@
 
 
+_id=-1;
+operation = "A";
+var LSEscola = localStorage.getItem("LSEscola");// Recupera os dados armazenados
+LSEscola = JSON.parse(LSEscola); // Converte string para objeto
+
+
+if (LSEscola == null) // Caso não haja conteúdo, iniciamos um vetor vazio
+    LSEscola = [];
+
+
+var LSCidade = localStorage.getItem("LSCidade");// Recupera os dados armazenados
+LSCidade = JSON.parse(LSCidade); // Converte string para objeto
+if (LSCidade == null) // Caso não haja conteúdo, iniciamos setado
+{
+    LSCidade = [];
+    cidades = ["Botucatu", "Bauru", "Perdeineiras", "Agudos", "Lençois Paulista"];
+    for (var cid = 0; cid < cidades.length; cid++) {
+        var temp = cidades[cid];
+        var cidade = JSON.stringify({
+            ID: 1,  //soma um com o valor do ultimo id,
+            Cidade: temp,
+        });
+        LSCidade.push(cidade);
+        localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
+    }
+
+}
+
 SelectList = function () {
 
     var comboCidades = document.getElementById("IdCidade");
@@ -11,41 +39,9 @@ SelectList = function () {
         comboCidades.add(opt0, _resultCidade.ID);
     }
 }
-
-var LSEscola = localStorage.getItem("LSEscola");// Recupera os dados armazenados
-LSEscola = JSON.parse(LSEscola); // Converte string para objeto
-if (LSEscola == null) // Caso não haja conteúdo, iniciamos um vetor vazio
-    LSEscola = [];
-
-
-var LSCidade = localStorage.getItem("LSCidade");// Recupera os dados armazenados
-LSCidade = JSON.parse(LSCidade); // Converte string para objeto
-if (LSCidade == null) // Caso não haja conteúdo, iniciamos setado
-{
-    LSCidade = [];
-    var cidade = JSON.stringify({
-        ID: 1,  //soma um com o valor do ultimo id,
-        Cidade: "Botucatu",
-    });
-    LSCidade.push(cidade);
-    localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
-
-    var cidade = JSON.stringify({
-        ID: 2,  //soma um com o valor do ultimo id,
-        Cidade: "Bauru",
-    });
-    LSCidade.push(cidade);
-    localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
-
-    var cidade = JSON.stringify({
-        ID: 3,  //soma um com o valor do ultimo id,
-        Cidade: "Perdeineiras",
-    });
-    LSCidade.push(cidade);
-    localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
-}
-
 Adicionar = function () {
+
+    
     var teste = 0;
     //pegar o ultimo id do array para adicionar um novo
     for (var j = 0; j < LSEscola.length; j++) {
@@ -66,36 +62,31 @@ Adicionar = function () {
     return true;
 }
 
-ConfirmarEditar = function (_id) {
-
-    for (var i = 0; i < LSEscola.length; i++) {
-        var _result = JSON.parse(LSEscola[i]);
-        if (_result.ID == _id) {
-            var tbl = document.createElement("table");
-            var tblBody = document.createElement("tbody");
-            var row = document.createElement("tr");
-            var cell = document.createElement("td");
-            var cellText = document.createTextNode(_result.Escola);
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-            tbl.appendChild(tblBody);
-            document.body.appendChild(tbl);
-        }
+ConfirmarEditar = function () {
+    if(operation == "E"){
+      Editar(_id);  
+    }else{
+        Cadastrar();
     }
-
 }
 
-Editar = function (_id) {
-
-
-    LSEscola[_id] = JSON.stringify({
-        ID: _id,
-        Escola: document.getElementById("IdEscola").value,
-        cidade: document.getElementById("IdCidade").value,
-    })
-    localStorage.setItem("LSEscola", JSON.stringify(LSEscola));
-    alert("Informações editadas");
-    operacao = "A";
+Editar = function (numero) {
+    for (var i = 0; i < LSEscola.length; i++) {
+        var _result = JSON.parse(LSEscola[i]);
+        if (_result.ID == numero) {
+            LSEscola[i] = JSON.stringify({
+                ID: numero,
+                Escola: document.getElementById("IdEscola").value,
+                Cidade: document.getElementById("IdCidade").value,
+            })
+            alert(numero + "" + i);
+            localStorage.setItem("LSEscola", JSON.stringify(LSEscola));
+            alert("Informações editadas");
+            operation = "A";
+            _id=-1;
+        }
+    }
+    window.location.href = "cadastro.html";
     return true;
 }
 
@@ -116,13 +107,15 @@ Excluir = function (numero) {
 }
 
 Listar = function () {
+    var LSEscola = localStorage.getItem("LSEscola");// Recupera os dados armazenados    
+    LSEscola = JSON.parse(LSEscola);
     var tbl = document.createElement("table");
     var tblhead = document.createElement("thead");
     var tblBody = document.createElement("tbody");
 
     var row = document.createElement("tr");
     var cell = document.createElement("th");
-    
+
     var cellText = document.createTextNode("ID");
     cell.appendChild(cellText);
     cell.scope = "col";
@@ -166,6 +159,7 @@ Listar = function () {
         var cellText = document.createTextNode("ID");
         cellText = document.createTextNode(_result.ID);
         cell.appendChild(cellText);
+        cell.scope = "row";
         row.appendChild(cell);
 
         cell = document.createElement("td");
@@ -185,8 +179,13 @@ Listar = function () {
         btnEditar.className = "btn btn-primary btn-block";
         btnEditar.id = _result.ID;
         btnEditar.onclick = function () {
-            _id = this.id;
-            ConfirmarEditar(_id);
+            num = parseInt(this.id);
+            _id = num;
+            buttonE = document.getElementById("btnCadastrar").innerHTML="Salvar";
+            operation = "E"
+
+            //buttonE.setAttribute("id","asa");
+            buttonC = document.getElementById("btnCancelar").innerHTML="Cancelar";
         };
         cell.appendChild(btnEditar);
         row.appendChild(cell);
@@ -203,7 +202,7 @@ Listar = function () {
         cell.appendChild(btnExcluir);
 
         row.appendChild(cell);
-        row.scope="row";
+        row.scope = "row";
         tblBody.appendChild(row);
     }
 

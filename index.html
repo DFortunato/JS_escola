@@ -1,50 +1,28 @@
 <!DOCTYPE html>
 <html>
 
-<head id="cadastro">
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Script em outra page</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-                integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script type="text/javascript" src="js/all.js"></script>
-        <script type="text/javascript" src="js/dados.js"></script>
+<head id="lista">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cadastros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <script type="text/javascript" src="js/lista.js"></script>
 </head>
 
 <body>
-        <nav class="navbar Fixed-top navbar-dark bg-dark">
-                <div class="container">
-                        <div class="navbar-brand">Cadastro de escola</div>
-                </div>
-        </nav>
-        <div class="col-sm-12 container jumbotron">
-                <div class="form-group">
-                        <label> Nome da escola: </label>
-                        <input type="text" class="form-control" id="IdEscola" placeholder="Nome da escola">
-                        <label id="AvisoEscola" class="invisible">*Preencha o nome da escola</label>
-                </div>
-                <div class="form-group">
-                        <label for="sel1">Cidades:</label>
-                        <select id="IdCidade" class="form-control">
-                        </select>
-                </div>
+    <nav class="navbar Fixed-top navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="cadastro.html">Sistema Cadastro</a>
         </div>
-        <br />
+    </nav>
 
-        <!--<div class="row col-sm-12 container-fluid justify-content-center">-->
-        <div class="d-flex flex-row justify-content-center">
-                <!--<div class="col-sm-4 align-middle">-->
-                <div class="p-4 w-50">
-                        <button id="btnCadastrar" class="btn btn-primary btn-block" onclick="Cadastrar()">Cadastrar</button>
-                </div>
 
-                <div class="p-4 w-50 ">
-                      
-                        <button id="btnCancelar" type="button" class="btn btn-danger btn-block" onclick="location.href='TelaCadastro.html'">Cancelar</a>
-                </div>
 
-        </div>
+
+
 </body>
 
 </html>
