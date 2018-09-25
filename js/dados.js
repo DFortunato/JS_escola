@@ -1,7 +1,7 @@
 
-
 _id = -1;
 operation = "A";
+editando = "N";
 
 var LSEscola = localStorage.getItem("LSEscola");// Recupera os dados armazenados
 LSEscola = JSON.parse(LSEscola); // Converte string para objeto
@@ -85,6 +85,7 @@ Editar = function (numero) {
             localStorage.setItem("LSEscola", JSON.stringify(LSEscola));
             alert("Informações editadas");
             operation = "A";
+            editando = "N";
             _id = -1;
         }
     }
@@ -180,30 +181,35 @@ Listar = function () {
         btnEditar.innerHTML = "Editar";
         btnEditar.className = "btn btn-primary  btn-block";
         btnEditar.id = _result.ID;
-        row.id = _result.ID+1213;
+        row.id = _result.ID + 1213;
         btnEditar.onclick = function () {
+            if (editando == "N") { 
             num = parseInt(this.id);
             _id = num;
-            document.getElementById(num+1213).classList.add("bg-primary");
-            for (var i = 0; i < LSEscola.length; i++) {
-                var _result = JSON.parse(LSEscola[i]);
-                if (_result.ID == _id) {
-                    document.getElementById("IdEscola").value = _result.Escola;
-                    for (var x = 0; x < LSCidade.length; x++) {
-                        var _resultCidade = JSON.parse(LSCidade[x]);
-                        if (_result.Cidade == _resultCidade.Cidade) {
-                            document.getElementById("IdCidade").options[x].selected = true;
+
+                document.getElementById(num + 1213).classList.add("bg-warning");
+                for (var i = 0; i < LSEscola.length; i++) {
+                    var _result = JSON.parse(LSEscola[i]);
+                    if (_result.ID == _id) {
+                        document.getElementById("IdEscola").value = _result.Escola;
+                        for (var x = 0; x < LSCidade.length; x++) {
+                            var _resultCidade = JSON.parse(LSCidade[x]);
+                            if (_result.Cidade == _resultCidade.Cidade) {
+                                document.getElementById("IdCidade").options[x].selected = true;
+                            }
                         }
                     }
                 }
-            }
-            var buttonE = document.getElementById("btnCadastrar");
-            buttonE.innerHTML = "Salvar";
-            buttonE.className = "btn btn-success btn-block";
-            operation = "E";
 
-            //buttonE.setAttribute("id","asa");
-            buttonC = document.getElementById("btnCancelar").innerHTML = "Cancelar";
+                var buttonE = document.getElementById("btnCadastrar");
+                buttonE.innerHTML = "Salvar";
+                buttonE.className = "btn btn-success btn-block";
+                operation = "E";
+
+                //buttonE.setAttribute("id","asa");
+                buttonC = document.getElementById("btnCancelar").innerHTML = "Cancelar";
+                editando = "S";
+            }
         };
         cell.appendChild(btnEditar);
         row.appendChild(cell);
@@ -215,12 +221,13 @@ Listar = function () {
         btnExcluir.id = _result.ID;
         btnExcluir.onclick = function () {
             _id = this.id;
-            Excluir(_id);
+            if(editando == "N"){
+                Excluir(_id);
+            };
         };
-        
-        
-        cell.appendChild(btnExcluir);
 
+
+        cell.appendChild(btnExcluir);
         row.appendChild(cell);
         row.scope = "row";
         tblBody.appendChild(row);
