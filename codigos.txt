@@ -98,3 +98,21 @@ LSEscola.splice(i, 1);
     alert("Registro excluído.");
 
 
+
+
+var cidade = JSON.stringify({
+        ID: 2,  //soma um com o valor do ultimo id,
+        Cidade: "Bauru",
+    });
+    LSCidade.push(cidade);
+    localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
+
+    var cidade = JSON.stringify({
+        ID: 3,  //soma um com o valor do ultimo id,
+        Cidade: "Perdeineiras",
+    });
+    LSCidade.push(cidade);
+    localStorage.setItem("LSCidade", JSON.stringify(LSCidade));
+
+
+

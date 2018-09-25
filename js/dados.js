@@ -13,15 +13,15 @@ if (LSEscola == null) // Caso não haja conteúdo, iniciamos um vetor vazio
 
 var LSCidade = localStorage.getItem("LSCidade");// Recupera os dados armazenados
 LSCidade = JSON.parse(LSCidade); // Converte string para objeto
-LSCidade = null;
+
 if (LSCidade == null) // Caso não haja conteúdo, iniciamos setado
 {
     LSCidade = [];
-    cidades = [ "Agudos", "Bauru", "Botucatu",  "Lençois Paulista", "Perdeineiras"];
+    cidades = ["Agudos", "Bauru", "Botucatu", "Lençois Paulista", "Perdeineiras"];
     for (var cid = 0; cid < cidades.length; cid++) {
         var temp = cidades[cid];
         var cidade = JSON.stringify({
-            ID: 1,  //soma um com o valor do ultimo id,
+            ID: cid + 1,  //soma um com o valor do ultimo id,
             Cidade: temp,
         });
         LSCidade.push(cidade);
@@ -82,7 +82,6 @@ Editar = function (numero) {
                 Escola: document.getElementById("IdEscola").value,
                 Cidade: document.getElementById("IdCidade").value,
             })
-            alert(numero + "" + i);
             localStorage.setItem("LSEscola", JSON.stringify(LSEscola));
             alert("Informações editadas");
             operation = "A";
@@ -179,22 +178,20 @@ Listar = function () {
         cell = document.createElement("td");
         var btnEditar = document.createElement("BUTTON");
         btnEditar.innerHTML = "Editar";
-        btnEditar.className = "btn btn-primary btn-block";
+        btnEditar.className = "btn btn-primary  btn-block";
         btnEditar.id = _result.ID;
+        row.id = _result.ID+1213;
         btnEditar.onclick = function () {
             num = parseInt(this.id);
             _id = num;
+            document.getElementById(num+1213).classList.add("bg-primary");
             for (var i = 0; i < LSEscola.length; i++) {
                 var _result = JSON.parse(LSEscola[i]);
                 if (_result.ID == _id) {
-                    document.getElementById("IdEscola").innerHTML = "slc";
+                    document.getElementById("IdEscola").value = _result.Escola;
                     for (var x = 0; x < LSCidade.length; x++) {
                         var _resultCidade = JSON.parse(LSCidade[x]);
                         if (_result.Cidade == _resultCidade.Cidade) {
-                            var sla = document.getElementById("IdCidade").value;
-                            tese = sla.id;
-                            alert(tese)
-                            alert(x)
                             document.getElementById("IdCidade").options[x].selected = true;
                         }
                     }
@@ -220,18 +217,15 @@ Listar = function () {
             _id = this.id;
             Excluir(_id);
         };
+        
+        
         cell.appendChild(btnExcluir);
 
         row.appendChild(cell);
         row.scope = "row";
         tblBody.appendChild(row);
     }
-
     tbl.appendChild(tblBody);
     tbl.className = "table";
     document.body.appendChild(tbl);
 }
-
-
-
-
