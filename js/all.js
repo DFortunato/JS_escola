@@ -17,7 +17,7 @@ function Cadastrar() {
     }
     else {
         Adicionar();
-        window.location.href = "cadastro.html";
+        window.location.href = "cadastroEscola.html";
     }
 }
 

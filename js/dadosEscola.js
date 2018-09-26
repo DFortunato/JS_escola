@@ -79,7 +79,7 @@ Editar = function (numero) {
             _id = -1;
         }
     }
-    window.location.href = "cadastro.html";
+    window.location.href = "cadastroEscola.html";
     return true;
 }
 
