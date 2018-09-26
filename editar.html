@@ -11,26 +11,31 @@
 </head>
 
 <body>
-    <nav class="navbar ">
-        sla
+    <nav class="navbar Fixed-top navbar-dark bg-dark">
+        <div class="container">
+            <div class="navbar-brand">
+                Cadastro de Cidade
+            </div>
+        </div>
     </nav>
 
-    <form id="frmCadastro" class="form">
-        <ul>
-            <li>
-                <label for="txtNome">Cidade:</label>
-                <input type="text" id="txtCidade" />
-            </li>
-            <li>
-                <label for="txtTelefone">Estado:</label>
-                <input type="text" id="txtEstado" />
-            </li>
+    <form id="frmCadastro" class="col-sm-12 container jumbotron">
+        <div class="form-group">
+            <label> Nome da cidade: </label>
+            <input type="text" id="txtCidade" class="form-control" placeholder="Nome da cidade" />
+            <br />
+            <label> Nome do estado: </label>
+            <input type="text" id="txtEstado" class="form-control" placeholder="Nome da estado" />
 
-
-            <input type="submit" value="Salvar" id="btnSalvar" />
-            <input type="reset" value="Cancelar" id="btnResetar" onclick="Restored()"  />
-
-        </ul>
+            <div class="d-flex flex-row justify-content-center">
+                <div class="p-4 w-50" id="cadastrao">
+                    <input type="submit" value="Salvar" id="btnSalvar" class="btn btn-primary btn-block" />
+                </div>
+                <div class="p-4 w-50" id="cadastrao">
+                    <input type="reset" value="Cancelar" id="btnResetar" class="btn btn-danger btn-block" onclick="Restored()" />
+                </div>
+            </div>
+        </div>
     </form>
 
     <table id="tblListar" class="table">

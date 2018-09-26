@@ -24,6 +24,7 @@ function Adicionar() {
         var cli = JSON.parse(tbClientes[i]);
         teste = cli.Codigo;
     };
+
     if (teste == null) // verifica se o resultado do id é nulo, se sim ele seta 0
         teste = 0;
 
@@ -85,7 +86,7 @@ function Listar() {
         var cli = JSON.parse(tbClientes[i]);
         $("#tblListar tbody").append("<tr>");
         $("#tblListar tbody").append("<td><img src='edit.png' alt='" + i + "'class='btnEditar' oncliclk='e'/>  |  <img src='delete.png' alt='" + i + "' class='btnExcluir'/></td>");
-        $("#tblListar tbody").append("<td>" + cli.Codigo + "</td>");
+        $("#tblListar tbody").append("<th scope='row'>" + cli.Codigo + "</th>");
         $("#tblListar tbody").append("<td>" + cli.Cidade + "</td>");
         $("#tblListar tbody").append("<td>" + cli.Estado + "</td>");
         $("#tblListar tbody").append("</tr>");
