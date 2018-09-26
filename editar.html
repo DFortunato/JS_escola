@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html>
 
-<head id="lista">
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cadastros</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>HTML5 Storage com JSON</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-
-    <script type="text/javascript" src="js/editar.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/dadosCidade.js"></script>
 </head>
 
 <body>
-    <nav class="navbar Fixed-top navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Editar</a>
-        </div>
+    <nav class="navbar ">
+        sla
     </nav>
 
+    <form id="frmCadastro" class="form">
+        <ul>
+            <li>
+                <label for="txtNome">Cidade:</label>
+                <input type="text" id="txtCidade" />
+            </li>
+            <li>
+                <label for="txtTelefone">Estado:</label>
+                <input type="text" id="txtEstado" />
+            </li>
 
+
+            <input type="submit" value="Salvar" id="btnSalvar" />
+            <input type="reset" value="Cancelar" id="btnResetar" onclick="Restored()"  />
+
+        </ul>
+    </form>
+
+    <table id="tblListar" class="table">
+
+    </table>
 </body>
 
 </html>
